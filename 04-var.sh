@@ -18,5 +18,5 @@ echo "Good Morning, Today's date is $DATE_COMMAND"
 # This is how we can fetch the system data
 echo "Number of logged in users are: $LOGGEDIN_USERS"
 
-echo "Number of logged in users are: LOGGEDIN_USERS=$(who | wc -l)
-
+echo "Number of logged in users are: $(who | wc -l)"
+echo "Good Morning, Today's date is $(date +%F)"
