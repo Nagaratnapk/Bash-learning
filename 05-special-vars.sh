@@ -14,8 +14,8 @@ echo -e "script name that you're running is : \e[31m $0 \e[0m"
 
 a=5
 b=$1
-c=$2
-d=$3
+c=$3
+d=$2
 e=$a
 echo value of a is :$a
 echo value of b is :$b
