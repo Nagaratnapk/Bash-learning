@@ -16,10 +16,12 @@ a=5
 b=$1
 c=$2
 d=$3
+e=$a
 echo value of a is :$a
 echo value of b is :$b
 echo value of c is :$c
 echo value of d is :$d
+echo value of e is :$e
 
 # sh scriptname.sh 10 20 300
 # sh scriptname.sh  $1  $2  $3
