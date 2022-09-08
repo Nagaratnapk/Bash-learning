@@ -25,3 +25,8 @@ echo value of e is :$e
 
 # sh scriptname.sh 10 20 300
 # sh scriptname.sh  $1  $2  $3
+
+echo "Printing the vairables that we have passed in the script $*"
+echo "Printing the vairables that we have passed in the script $@"
+echo "Printing the number vairables that we have passed in the scrip $#"
+echo "Prining the PID of the script that we are running $$"
