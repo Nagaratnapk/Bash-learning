@@ -2,6 +2,7 @@
 set -e   # ensure your script will stop if any of the instruction fails
 
 source components/common.sh
+# source is a command to import a file and run it locally
 
 echo -n " installing nginx: "
 yum install nginx -y
