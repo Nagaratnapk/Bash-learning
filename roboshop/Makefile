@@ -6,3 +6,7 @@ catalogue:
 
 cart:
 	bash components/cart.sh
+	
+shipping:
+	bash components/shipping.sh
+

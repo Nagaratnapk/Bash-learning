@@ -6,7 +6,7 @@ source components/common.sh
 # source is a command to import a file and run it locally
 
 echo -n " installing nginx: "
-yum install nginx -y
+yum install nginx -y >> /tmp/frontend.log 
 
 systemctl enable nginx
 
@@ -18,7 +18,7 @@ curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend
 
 cd /usr/share/nginx/html
 rm -rf *
-unzip /tmp/frontend.zip
+unzip /tmp/frontend.zip >> /tmp/frontend.log
 mv frontend-main/* .
 mv static/* .
 rm -rf frontend-main README.md
