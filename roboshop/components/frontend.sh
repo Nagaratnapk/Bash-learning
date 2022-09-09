@@ -5,16 +5,19 @@ set -e   # ensure your script will stop if any of the instruction fails
 source components/common.sh
 # source is a command to import a file and run it locally
 
-echo -n " installing nginx: "
+echo -n "Installing nginx:"
 yum install nginx -y >> /tmp/frontend.log 
+stat $?
 
 systemctl enable nginx
 
-echo -n "Starting nginx: "
+echo -n "Starting nginx:"
 systemctl start nginx
+stat $?
 
-echo -n "Downloading the Code"
+echo -n "Downloading the Code:"
 curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip"
+stat $?
 
 cd /usr/share/nginx/html
 rm -rf *
@@ -24,7 +27,7 @@ mv static/* .
 rm -rf frontend-main README.md
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
 
-echo -n "Starting ngnix: "
+echo -n "Starting ngnix:"
 systemctl restart nginx
 stat $?
 
