@@ -1,5 +1,5 @@
 frontend:
-	bash /roboshop/components/frontend.sh
+	bash components/frontend.sh
 
 catalogue:
 	bash /roboshop/components/catalogue.sh
