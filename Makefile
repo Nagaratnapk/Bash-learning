@@ -1,8 +1,8 @@
 frontend:
-	bash components/frontend.sh
+	bash /roboshop/components/frontend.sh
 
 catalogue:
-	bash components/catalogue.sh
+	bash /roboshop/components/catalogue.sh
 
 cart:
 	bash components/cart.sh
