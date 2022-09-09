@@ -3,10 +3,15 @@ set -e   # ensure your script will stop if any of the instruction fails
 
 source components/common.sh
 
+echo -n " installing nginx: "
 yum install nginx -y
+
 systemctl enable nginx
+
+echo -n "Starting Nginx: "
 systemctl start nginx
 
+echo -n "Downloading the Code"
 curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip"
 
 cd /usr/share/nginx/html
@@ -16,4 +21,8 @@ mv frontend-main/* .
 mv static/* .
 rm -rf frontend-main README.md
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
+
+echo -n "Starting Ngnix: "
+systemctl restart nginx
+stat $?
 
