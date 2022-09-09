@@ -10,7 +10,7 @@ yum install nginx -y
 
 systemctl enable nginx
 
-echo -n "Starting Nginx: "
+echo -n "Starting nginx: "
 systemctl start nginx
 
 echo -n "Downloading the Code"
@@ -24,7 +24,7 @@ mv static/* .
 rm -rf frontend-main README.md
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
 
-echo -n "Starting Ngnix: "
+echo -n "Starting ngnix: "
 systemctl restart nginx
 stat $?
 
