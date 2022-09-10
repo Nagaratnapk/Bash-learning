@@ -4,6 +4,9 @@ frontend:
 catalogue:
 	bash components/catalogue.sh
 
+mongodb:
+	bash components/mongodb.sh
+
 cart:
 	bash components/cart.sh
 	
