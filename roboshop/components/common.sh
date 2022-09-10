@@ -14,3 +14,9 @@ stat() {
         echo -e "\e[31m Failure. Look for the logs \e[0m"  
     fi 
 }
+#replace Component Ip address
+# replace_ip(){
+#     local name=$1
+#     local compip=$2
+
+# }
