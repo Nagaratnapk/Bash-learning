@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e 
+
 source components/common.sh
 # source is a command to import a file and run it locally
 
