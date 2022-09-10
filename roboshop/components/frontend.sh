@@ -32,7 +32,7 @@ systemctl restart nginx
 stat $?
 
 echo -n "Configuring Catalogue IP Address in nginx:"
-sed -i -e 's/\(location.*catalogue.*\)localhost\(:8080.*\)\1172.31.9.73\2/' /etc/nginx/default.d/roboshop.conf
+sed -i -e 's/\(location.*catalogue.*\)localhost\(:8080.*\)/\1172.31.9.73\2/' /etc/nginx/default.d/roboshop.conf
 stat $?
 
 echo -n "Restarting the nginx:"
