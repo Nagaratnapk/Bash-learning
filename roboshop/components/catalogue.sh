@@ -28,7 +28,7 @@ stat $?
 
 echo -n "Extracting ${COMPONENT} content: "
 cd /home/${FUSER}/ >> /tmp/${COMPONENT}.log 
-unzip -o  /tmp/{COMPONENT}.zip  >> /tmp/${COMPONENT}.log   &&   mv ${COMPONENT}-main ${COMPONENT} >> /tmp/${COMPONENT}.log 
+unzip -o /tmp/{COMPONENT}.zip  >> /tmp/${COMPONENT}.log   &&   mv ${COMPONENT}-main ${COMPONENT} >> /tmp/${COMPONENT}.log 
 stat $? 
 
 echo -n "Changing the ownership to ${FUSER}:"
@@ -39,8 +39,8 @@ echo -n "Installing ${COMPONENT} Dependencies:"
 cd ${COMPONENT} && npm install &>> /tmp/${COMPONENT}.log 
 stat $? 
 
-echo -n "Configuring the Systemd file: "
-sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/${FUSER}/${COMPONENT}/systemd.service 
+echo -n "Configuring the Systemd file:"
+sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/'/home/${FUSER}/${COMPONENT}/systemd.service 
 mv /home/${FUSER}/${COMPONENT}/systemd.service /etc/systemd/system/catalogue.service
 stat $? 
 
