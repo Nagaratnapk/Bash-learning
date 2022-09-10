@@ -32,7 +32,7 @@ unzip -o  /tmp/{COMPONENT}.zip  >> /tmp/${COMPONENT}.log   &&   mv ${COMPONENT}-
 stat $? 
 
 echo -n "Changing the ownership to ${FUSER}:"
-chown -R $FUSER:$FUSER $COMPONENT/
+chown -R $FUSER:$FUSER $COMPONENT
 stat $?
 
 echo -n "Installing ${COMPONENT} Dependencies:"
