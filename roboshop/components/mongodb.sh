@@ -37,10 +37,9 @@ mongo < catalogue.js >> /tmp/${COMPONENT}.log
 mongo < users.js  >> /tmp/${COMPONENT}.log
 stat $? 
 echo -n -e "\e[32m \n ****** ${COMPONENT} Cofiguration Completed ********* \n \e[0m"
+
 #echo -n -e "\e[31m"\n ****** $COMPONENT Cofiguration Completed ********* \n"\e[0m"
-
 # curl -s -L -o /tmp/mongodb.zip "https://github.com/stans-robot-project/mongodb/archive/main.zip"
-
 # cd /tmp
 # unzip mongodb.zip
 # cd mongodb-main
