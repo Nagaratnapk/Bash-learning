@@ -27,3 +27,22 @@ echo -n "Downloading the schema:"
 curl -s -L -o /tmp/mongodb.zip "https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip"
 stat $?
 
+echo -n "Extracting the ${COMPONENT} Schema:"
+cd /tmp && unzip -o ${COMPONENT}.zip >> /tmp/${COMPONENT}.log
+stat $?
+
+echo -n "Injecting the ${COMPONENT} schema: "
+cd mongodb-main
+mongo < catalogue.js >> /tmp/${COMPONENT}.log
+mongo < users.js  >> /tmp/${COMPONENT}.log
+stat $? 
+
+echo -n -e "\n ****** $COMPONENT Cofiguration Completed ********* \n"
+
+# curl -s -L -o /tmp/mongodb.zip "https://github.com/stans-robot-project/mongodb/archive/main.zip"
+
+# cd /tmp
+# unzip mongodb.zip
+# cd mongodb-main
+# mongo < catalogue.js
+# mongo < users.js
