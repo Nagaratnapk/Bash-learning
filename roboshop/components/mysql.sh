@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e 
 
 source components/common.sh
 
@@ -18,3 +17,35 @@ echo -n "Starting ${COMPONENT} : "
 systemctl enable mysqld  &>> ${LOGFILE}
 systemctl start mysqld &>> ${LOGFILE}
 stat $?
+
+echo -n "Fetching the default root password: "
+DEFAULT_ROOT_PASSWORD=$(sudo grep temp /var/log/mysqld.log | head -n 1 | awk -F " " '{print $NF}')
+stat $? 
+
+#If the exit code is non-zero then only I want to execute, if not, I would like to skip 
+echo show databases | mysql -uroot -pRoboShop@1 &>> ${LOGFILE}
+if [ $? -ne 0 ]; then 
+    echo -n "Reset Root Password: "
+    echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password  -uroot -p"${DEFAULT_ROOT_PASSWORD}" > ${LOGFILE}
+    stat $? 
+fi 
+
+echo 'show plugins;' | mysql -uroot -pRoboShop@1 &>> ${LOGFILE} | grep validate_password &>> ${LOGFILE}
+if [ $? -eq 0 ] ; then 
+    echo -n "Uninstalling the password validate plugin :"
+    echo  "uninstall plugin validate_password;" | mysql -uroot -pRoboShop@1  &>> ${LOGFILE}
+    stat $? 
+fi 
+
+echo -n "Downloading the schema:"
+cd /tmp 
+curl -s -L -o /tmp/mysql.zip "https://github.com/stans-robot-project/mysql/archive/main.zip"  &>> ${LOGFILE} && unzip -o /tmp/mysql.zip    &>> ${LOGFILE}
+stat $? 
+
+echo -n "Injecting the Schema: "
+cd /tmp/mysql-main/
+mysql -uroot -pRoboShop@1 <shipping.sql  &>> ${LOGFILE}
+stat $? 
+
+
+echo -n -e "\e[32m \n ****** ${COMPONENT} Installation Completed ********* \n \e[0m"

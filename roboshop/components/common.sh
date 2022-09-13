@@ -51,7 +51,7 @@ DOWNLOAD_AND_EXTRACT() {
 
 CONFIG_SVC() {
     echo -n "Configuring the Systemd file: "
-    sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/'  -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' /home/${FUSER}/${COMPONENT}/systemd.service 
+    sed -i -e 's/CARTENDPOINT/cart.roboshop.internal/' -e 's/DBHOST/mysql.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/'  -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' /home/${FUSER}/${COMPONENT}/systemd.service 
     mv /home/${FUSER}/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service
     stat $? 
 
@@ -82,5 +82,23 @@ NODEJS() {
     stat $? 
     
     # Calling Config_SVC Function
+    CONFIG_SVC
+}
+
+MAVEN() {
+    echo -n "Installing Maven: "
+    yum install maven -y &>> LOGFILE
+    stat $? 
+
+    USER_SETUP
+
+    DOWNLOAD_AND_EXTRACT
+    
+    echo -n "Generating the artifact :"
+    cd /home/${FUSER}/${COMPONENT}
+    mvn clean package   &>> LOGFILE
+    mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
+    stat $? 
+    
     CONFIG_SVC
 }
