@@ -51,7 +51,7 @@ DOWNLOAD_AND_EXTRACT() {
 
 CONFIG_SVC() {
     echo -n "Configuring the Systemd file: "
-    sed -i -e 's/CARTENDPOINT/cart.roboshop.internal/' -e 's/DBHOST/mysql.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/'  -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' /home/${FUSER}/${COMPONENT}/systemd.service 
+    sed -i -e 's/CARTHOST/cart.roboshop.internal/' -e 's/USERHOST/user.roboshop.internal/' -e 's/AMQPHOST/rabbitmq.roboshop.internal/' -e 's/CARTENDPOINT/cart.roboshop.internal/' -e 's/DBHOST/mysql.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/'  -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' /home/${FUSER}/${COMPONENT}/systemd.service 
     mv /home/${FUSER}/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service
     stat $? 
 
@@ -102,3 +102,27 @@ MAVEN() {
     
     CONFIG_SVC
 }
+
+PYTHON() {
+    echo -n "Installing Pyhton:"
+    yum install python36 gcc python3-devel -y &>> ${LOGFILE} 
+    stat $? 
+
+    USER_SETUP
+
+    DOWNLOAD_AND_EXTRACT
+
+    cd /home/${FUSER}/${COMPONENT}/
+    pip3 install -r requirements.txt   &>> ${LOGFILE} 
+    stat $? 
+
+    USER_ID=$(id -u roboshop)
+    GROUP_ID=$(id -g roboshop)
+
+    echo -n "Updating the $COMPONENT.ini file"
+    sed -i -e "/^uid/ c uid=${USER_ID}" -e "/^gid/ c gid=${GROUP_ID}" payment.ini
+    stat $? 
+
+    CONFIG_SVC
+}
+Footer
