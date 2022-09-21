@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# script_name  = launch-ec2.sh
 # AMI_ID="ami-07e39ca5545805dfa"
 
 # If  1$ is empty or $1 is not supplied, then I want to mark it as failure.
