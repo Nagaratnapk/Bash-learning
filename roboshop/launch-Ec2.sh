@@ -9,9 +9,9 @@ fi
 
 COMPONENT=$1
 ENV=$2
-ZONEID="Z04602961I29SHWLCRCU3"
+ZONEID="Z02706543V2P7F2FG8G6T"
 AMI_ID=$(aws ec2 describe-images  --filters "Name=name,Values=DevOps-LabImage-CentOS7"  | jq '.Images[].ImageId' | sed -e 's/"//g')
-SGID="sg-000671b0e1fb3d069"
+SGID="sg-04f654022c3682b9b"
 
 echo "The AMI which we are using is $AMI_ID"
 create-server() {
