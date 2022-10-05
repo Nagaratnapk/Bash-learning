@@ -19,3 +19,6 @@
 ##### PS: Ensure you are inside the repo to executre the git commands ; We will perform clone once and pull multiple times
 
 ##### Trying my best to get this right
+
+## Command to clone multiple repo at once
+## for i in frontend catalogue cart user dispatch shipping payment mongodb mysql rabitmq ## redis  ; do git clone https://github.com/Nagaratnapk; done  
